@@ -1,4 +1,19 @@
+import sys
 from stats import counting_words, counting_characters, chars_dict_to_sorted_list
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py path_to_file")
+        sys.exit(1)
+
+    path_to_file = sys.argv[1]  # Specify the path to your book file
+    text = get_book_text(path_to_file)
+    num_words = counting_words(text)
+    num_chars = counting_characters(text)
+    chars_sorted_list = chars_dict_to_sorted_list(num_chars)
+    print_report(path_to_file, num_words, chars_sorted_list)
+
+
 
 def get_book_text(path_to_file):
     with open(path_to_file) as f:
@@ -16,20 +31,5 @@ def print_report(path_to_file, num_words, chars_sorted_list):
         print(f"{item['char']}: {item['count']}")
 
     print("============= END ===============")
-
-
-
-
-
-def main():
-    path_to_file = 'books/frankenstein.txt'  # Specify the path to your book file
-    text = get_book_text(path_to_file)
-    num_words = counting_words(text)
-    num_chars = counting_characters(text)
-    chars_sorted_list = chars_dict_to_sorted_list(num_chars)
-    print_report(path_to_file, num_words, chars_sorted_list)
-
-   
-    
 
 main()
